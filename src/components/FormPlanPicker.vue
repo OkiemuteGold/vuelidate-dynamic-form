@@ -78,6 +78,10 @@ export default {
     methods: {
         pickPlan(plan) {
             this.selectedPlan = plan;
+
+            this.$emit("updateData", {
+                plan: this.selectedPlan,
+            });
         },
     },
 };

@@ -10,8 +10,9 @@
             <div class="form-group">
                 <label class="form-label" for="email">Email</label>
                 <input
-                    type="text"
+                    @input="submit"
                     v-model="$v.form.email.$model"
+                    type="text"
                     placeholder="your@email.com"
                     class="form-control"
                     id="email"
@@ -33,6 +34,7 @@
             <div class="form-group">
                 <label class="form-label" for="password">Password</label>
                 <input
+                    @input="submit"
                     v-model="$v.form.password.$model"
                     type="password"
                     placeholder="Super Secret Password"
@@ -50,6 +52,7 @@
             <div class="form-group">
                 <label class="form-label" for="name">Name</label>
                 <input
+                    @input="submit"
                     v-model="$v.form.name.$model"
                     type="text"
                     placeholder="What should we call you?"
@@ -66,6 +69,7 @@
 
 <script>
 import { required, email } from "vuelidate/lib/validators";
+
 export default {
     data() {
         return {
@@ -88,6 +92,17 @@ export default {
             name: {
                 required,
             },
+        },
+    },
+    methods: {
+        submit() {
+            if (!this.$v.form.$invalid) {
+                this.$emit("updateData", {
+                    email: this.form.email,
+                    password: this.form.password,
+                    name: this.form.name,
+                });
+            }
         },
     },
 };

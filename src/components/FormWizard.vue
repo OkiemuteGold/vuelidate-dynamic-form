@@ -1,7 +1,13 @@
 <template>
     <div>
-        <FormPlanPicker v-if="currentStepNumber === 1" />
-        <FormUserDetails v-if="currentStepNumber === 2" />
+        <FormPlanPicker
+            v-if="currentStepNumber === 1"
+            @updateData="processStep"
+        />
+        <FormUserDetails
+            v-if="currentStepNumber === 2"
+            @updateData="processStep"
+        />
         <FormAddress v-if="currentStepNumber === 3" />
         <FormReviewOrder v-if="currentStepNumber === 4" />
 
@@ -66,6 +72,10 @@ export default {
         },
         goToNext() {
             this.currentStepNumber++;
+        },
+        processStep(stepData) {
+            // Object.assign copies the properties of an object to another one
+            Object.assign(this.form, stepData);
         },
     },
 };
