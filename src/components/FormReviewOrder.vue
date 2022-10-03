@@ -33,7 +33,7 @@
                 Treat yourself by leveling up your monthly box
             </p>
 
-            <div class="options">
+            <div @change="submit" class="options">
                 <div class="option">
                     <input
                         v-model="form.chocolate"
@@ -89,6 +89,14 @@ export default {
     computed: {
         totalPrice() {
             return 0;
+        },
+    },
+    methods: {
+        submit() {
+            this.$emit("updateData", {
+                chocolate: this.form.chocolate,
+                otherTreat: this.form.otherTreat,
+            });
         },
     },
 };
